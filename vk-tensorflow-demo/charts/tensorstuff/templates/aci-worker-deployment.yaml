@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ template "tensorstuff.fullname" . }}-aci-worker 
   labels:
-    app: {{ template "tensorstuff.name" . }}
+    app: {{ template "tensorstuff.name" . }}-worker
     chart: {{ template "tensorstuff.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -11,12 +11,12 @@ spec:
   replicas: {{ .Values.worker.replicaCount.aci }}
   selector:
     matchLabels:
-      app: {{ template "tensorstuff.name" . }}
+      app: {{ template "tensorstuff.name" . }}-worker
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "tensorstuff.name" . }}
+        app: {{ template "tensorstuff.name" . }}-worker
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -29,19 +29,19 @@ spec:
               protocol: TCP
           env:
             - name: API_BASE_URL
-              value: "https://fi.rbitia.com"
+              value: "http://fruit.westus.az.k8sdemo.io"
           volumeMounts:
             - mountPath: /app/assets/images
               name: fruitshare
       volumes: 
-        - name: {{ .Chart.Name }}
+        - name: fruitshare
           azureFile:
             secretName: azure-secret
-            shareName: fruitshare
+            shareName: fruit
             readOnly: false
       dnsPolicy: ClusterFirst
       nodeSelector:
-        kubernetes.io/hostname: virtual-kubelet-myaciconnector-linux
+        kubernetes.io/hostname: virtual-kubelet-aci-connector-linux-westus
       tolerations:
       - key: azure.com/aci
         effect: NoSchedule
