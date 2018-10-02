@@ -29,7 +29,7 @@ spec:
               protocol: TCP
           env:
             - name: API_BASE_URL
-              value: "http://fruit.westus.az.k8sdemo.io"
+              value: "http://fruit.westus2.az.k8sdemo.io"
           volumeMounts:
             - mountPath: /app/assets/images
               name: fruitshare

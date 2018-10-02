@@ -29,7 +29,7 @@ spec:
               protocol: TCP
           env:
             - name: API_BASE_URL
-              value: "http://fruit.westus.az.k8sdemo.io"
+              value: "http://fruit.westus2.az.k8sdemo.io"
           volumeMounts:
             - mountPath: /app/assets/images
               name: fruitshare
@@ -41,7 +41,7 @@ spec:
             readOnly: false
       dnsPolicy: ClusterFirst
       nodeSelector:
-        kubernetes.io/hostname: virtual-kubelet-aci-connector-linux-westus
+        kubernetes.io/hostname: virtual-kubelet-aci-connector-linux-westus2
       tolerations:
       - key: azure.com/aci
         effect: NoSchedule
