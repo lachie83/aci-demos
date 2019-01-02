@@ -43,6 +43,6 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: virtual-kubelet-aci-connector-linux-westus2
       tolerations:
-      - key: azure.com/aci
+      - key: virtual-kubelet.io/provider
         effect: NoSchedule
-    
+        value: azure
